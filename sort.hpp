@@ -14,8 +14,7 @@ template <typename RandomIt,
           typename std::enable_if_t<is_random_access_iterator<RandomIt>::value,
                                     std::nullptr_t> = nullptr>
 void bubble_sort(RandomIt first, RandomIt last) {
-  auto right = last;
-  while (first < right) {
+  for (auto right = last; first < right; --right) {
     auto it1 = first;
     auto it2 = first + 1;
     while (it2 < right) {
@@ -23,7 +22,6 @@ void bubble_sort(RandomIt first, RandomIt last) {
       ++it1;
       ++it2;
     }
-    --right;
   }
 }
 
@@ -31,19 +29,16 @@ template <typename RandomIt,
           typename std::enable_if_t<is_random_access_iterator<RandomIt>::value,
                                     std::nullptr_t> = nullptr>
 void selection_sort(RandomIt first, RandomIt last) {
-  auto find_min = [](RandomIt first, RandomIt last, RandomIt min) {
-    auto it = first;
-    while (it < last) {
+  auto find_min = [](RandomIt first, RandomIt last) {
+    auto min = first++;
+    for (auto it = first; it < last; ++it)
       if (*min > *it) min = it;
-      ++it;
-    }
     return min;
   };
-  auto it = first;
-  while (it + 1 < last) {
-    auto min = find_min(it + 1, last, it);
+
+  for (auto it = first; it < last; ++it) {
+    auto min = find_min(it, last);
     std::swap(*it, *min);
-    ++it;
   }
 }
 
@@ -51,9 +46,6 @@ template <typename RandomIt,
           typename std::enable_if_t<is_random_access_iterator<RandomIt>::value,
                                     std::nullptr_t> = nullptr>
 void shaker_sort(RandomIt first, RandomIt last) {
-  auto left = first;
-  auto right = last;
-
   auto forward_scan = [](auto left, auto right) {
     auto it1 = left;
     auto it2 = it1 + 1;
@@ -84,6 +76,8 @@ void shaker_sort(RandomIt first, RandomIt last) {
     return new_left;
   };
 
+  auto left = first;
+  auto right = last;
   while (true) {
     right = forward_scan(left, right);
     if (left == right) break;
