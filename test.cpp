@@ -5,8 +5,8 @@
 class SortTest : public ::testing::Test {
  protected:
   void SetUp() override {
-    v_ = std::vector<int>({10, 3, 1, 4, 2, 6, 4, 5, 7, 8, 9, 7});
-    v_ans_ = std::vector<int>({1, 2, 3, 4, 4, 5, 6, 7, 7, 8, 9, 10});
+    v_ = {10, 3, 1, 4, 2, 6, 4, 5, 7, 8, 9, 7};
+    v_ans_ = {1, 2, 3, 4, 4, 5, 6, 7, 7, 8, 9, 10};
   }
 
   std::vector<int> v_;
