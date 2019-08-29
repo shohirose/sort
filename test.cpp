@@ -2,8 +2,6 @@
 #include <vector>
 #include "sort.hpp"
 
-namespace sh = shirose;
-
 class SortTest : public ::testing::Test {
  protected:
   void SetUp() override {

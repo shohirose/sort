@@ -3,7 +3,7 @@
 #include <type_traits>
 #include <utility>
 
-namespace shirose {
+namespace sh {
 
 template <typename Iterator>
 struct is_random_access_iterator
@@ -189,4 +189,4 @@ void shell_sort(RandomIt first, RandomIt last) {
   }
 }
 
-}  // namespace shirose
+}  // namespace sh
